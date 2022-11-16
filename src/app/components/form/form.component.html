@@ -1,0 +1,19 @@
+<div class="form-group mb-5 p-5 text-bg-light ">
+    <h2 class="pb-3 font-italic"> Search the metadata of journal articles, books, standards, datasets & more</h2>
+    <input class="form-control" type="text" [formControl]="searchTermControl" required> <br>
+    <input class="btn btn-success" type="submit" value="Search" (click)="searchKeyWord()">
+</div>
+
+<div class="card w-100 mt-3 mb-3" *ngFor="let article of fullArticles | paginate: { id: 'listing_pagination',
+itemsPerPage:10, currentPage: page, totalItems: totalRecords}">
+
+    <div class="card-body">
+        <h5 class="card-title">{{ article.title }}</h5>
+        <a href="{{article.URL}}" target=""><i class="fas fa-link"></i> {{ article.URL }}</a>
+        <p class="card-text">Publishser: {{ article.publisher }}</p>
+    </div>
+</div>
+<div class="bg-secondary mt-5">
+    <pagination-controls id="listing_pagination" maxSize:string="5" directionLinks:bool=true
+        (pageChange)="page = $event"></pagination-controls>
+</div>
